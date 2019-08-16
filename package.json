@@ -12,6 +12,7 @@
     "com": "node scripts/component"
   },
   "dependencies": {
+    "compression-webpack-plugin": "^3.0.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
