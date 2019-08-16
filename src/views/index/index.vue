@@ -1,6 +1,9 @@
 <template>
   <div class="index-wrap">
     {{data.pageName}}
+    <div class="ceshi">
+      测试
+    </div>
   </div>
 </template>
 
@@ -38,6 +41,8 @@ export default class About extends Vue {
 }
 </script>
 
-<style lang="scss">
-  
+<style lang="scss" scope>
+.ceshi {
+  width: 200px;
+}
 </style>

@@ -19,10 +19,34 @@ const BASE_URL = process.env.NODE_ENV === 'production' ? '/' : '/'
 module.exports = {
     baseUrl: BASE_URL,
     outputDir: 'dist', // 打包生成的生产环境构建文件的目录
+    lintOnSave: true, // eslint-loader 是否在保存的时候检查 
+    // runtimeCompiler: false, // 是否使用包含运行时编译器的Vue核心的构建
     assetsDir: '', // 放置生成的静态资源路径，默认在outputDir
     indexPath: 'index.html', // 指定生成的 index.html 输入路径，默认outputDir
     // pages: undefined, // 构建多页
     productionSourceMap: false, // 开启 生产环境的 source map?
+    configureWebpack: {
+        plugins: [
+            new CompressionWebpackPlugin({
+                // asset: '[path].gz[query]',
+                algorithm: 'gzip',
+                test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+                threshold: 10240,
+                minRatio: 0.8
+            }),
+            // new UglifyJsPlugin({
+            //     uglifyOptions: {
+            //       compress: {
+            //         warnings: false,
+            //         drop_debugger: true,
+            //         drop_console: true,
+            //       },
+            //     },
+            //     sourceMap: false,
+            //     parallel: true,
+            // })
+        ]
+    },
     chainWebpack: config => {
     // 配置路径别名
     config.resolve.alias
@@ -45,8 +69,11 @@ module.exports = {
     crossorigin:undefined,
     // 在生成的 HTML 中的 <link rel="stylesheet"> 和 <script> 标签上启用 Subresource Integrity (SRI)。如果你构建后的文件是部署在 CDN 上的，启用该选项可以提供额外的安全性。需要注意的是该选项仅影响由 html-webpack-plugin 在构建时注入的标签 - 直接写在模版 (public/index.html) 中的标签不受影响。另外，当启用 SRI 时，preload resource hints 会被禁用，因为 Chrome 的一个 bug 会导致文件被下载两次。
     integrity:false,
+    parallel: require('os').cpus().length > 1, // 在多核机器下会默认开启。
+    pwa: {}, // PWA 插件的选项。   
     devServer: {
         port: 8080, // 端口
         proxy: 'http://kong.missxiaolin.com' // 设置代理
-    }
+    },
+    pluginOptions: {} // 第三方插件的选项
 }
