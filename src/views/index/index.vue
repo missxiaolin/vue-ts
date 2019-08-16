@@ -7,6 +7,8 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
 import { IndexData } from '@/types/views/index.interface'
+import User from '@/api/login'
+const user = new User()
 
 @Component({})
 export default class About extends Vue {
@@ -16,7 +18,9 @@ export default class About extends Vue {
   }
 
   created() {
-    //
+    user.login().then((res: any) => {
+      console.log(res)
+    })
   }
     
   activated() {

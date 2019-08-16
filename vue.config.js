@@ -47,6 +47,6 @@ module.exports = {
     integrity:false,
     devServer: {
         port: 8080, // 端口
-        proxy: 'https://baidu.com' // 设置代理
+        proxy: 'http://kong.missxiaolin.com' // 设置代理
     }
 }
