@@ -1,5 +1,12 @@
 const path = require('path')
 
+// 定义压缩文件类型
+const productionGzipExtensions = ['js', 'css']
+//webpack-bundle-analyzer
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
 const resolve = dir => {
     return path.join(__dirname, dir)
 }
