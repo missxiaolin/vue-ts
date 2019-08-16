@@ -57,7 +57,16 @@ module.exports = {
         modules: false, // 启用 CSS modules
         extract: true, // 是否使用css分离插件
         sourceMap: false, // 开启 CSS source maps?
-        loaderOptions: {} // css预设器配置项
+        loaderOptions: {
+            postcss: {
+                // 这是rem适配的配置  注意： remUnit在这里要根据lib-flexible的规则来配制，如果您的设计稿是750px的，用75就刚刚好。
+                 plugins: [
+                    require("postcss-px2rem")({
+                        remUnit: 75
+                    })
+                ]
+            }
+        } // css预设器配置项
     },
     // 默认情况下，生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存。然而，这也要求 index 的 HTML 是被 Vue CLI 自动生成的。如果你无法使用 Vue CLI 生成的 index HTML，你可以通过将这个选项设为 false 来关闭文件名哈希。
     filenameHashing:true,
