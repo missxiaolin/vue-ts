@@ -38,6 +38,16 @@ npm run test:unit
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+### create components
+```
+npm run com test
+```
+
+### create views
+```
+npm run view index
+```
+
 ### es 规则
 
 ```
