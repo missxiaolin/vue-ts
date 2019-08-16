@@ -59,17 +59,6 @@ class HttpRequest {
             return Promise.reject(error)
         })
     }
-
-    // 失败
-    requestFail(res: AxiosResponse) {
-        let errStr = '网络繁忙！'
-        return {
-            err : console.log({
-                code: res.data.errcode || res.data.code,
-                msg: res.data.errmsg || errStr
-            })
-        }
-    }
 }
 
 export default HttpRequest as any
