@@ -9,6 +9,10 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
+// https://github.com/Brooooooklyn/ts-import-plugin 使用ts的情况
+// webpack.config.js
+const tsImportPluginFactory = require('ts-import-plugin')
+
 const resolve = dir => {
     return path.join(__dirname, dir)
 }
@@ -47,11 +51,33 @@ module.exports = {
             })
         ]
     },
+    // module: {
+
+    // },
     chainWebpack: config => {
         // 配置路径别名
         config.resolve.alias
             .set('@', resolve('src'))
             .set('_c', resolve('src/components'))
+        // config.module.rule('ts-loader')
+        //                 .test(/\.(jsx|tsx|js|ts)$/)
+        //                 .use('ts-loader')
+        //                 .loader('ts-loader')
+        //                 .options({
+        //                     transpileOnly: true,
+        //                     getCustomTransformers: () => ({
+        //                     before: [ tsImportPluginFactory({
+        //                         libraryName: 'vant',
+        //                         libraryDirectory: 'lib',
+        //                         style: true
+        //                     }) ]
+        //                     }),
+        //                     compilerOptions: {
+        //                         module: 'es2015'
+        //                     }
+        //                 })
+        //                 .exclude(/node_modules/)
+        //                 .end()
     },
     css: {
         modules: false, // 启用 CSS modules
