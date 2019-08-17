@@ -30,7 +30,7 @@ module.exports = {
     // pages: undefined, // 构建多页
     productionSourceMap: false, // 开启 生产环境的 source map?
     configureWebpack: {
-        plugins: [
+        plugins: process.env.NODE_ENV === 'production' ? [
             new CompressionWebpackPlugin({
                 // asset: '[path].gz[query]',
                 algorithm: 'gzip',
@@ -49,7 +49,7 @@ module.exports = {
                 sourceMap: false,
                 parallel: true,
             })
-        ]
+        ] : []
     },
     // module: {
 
