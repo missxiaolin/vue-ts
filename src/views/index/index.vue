@@ -25,6 +25,8 @@ export default class About extends Vue {
     user.login().then((res: any) => {
       console.log(res)
     })
+
+    console.log(process.env.VUE_APP_WEB_API)
   }
     
   activated() {

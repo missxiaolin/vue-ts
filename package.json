@@ -5,6 +5,10 @@
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
+    "build:qa": "vue-cli-service build --mode qa",
+    "build:pre": "vue-cli-service build --mode pre",
+    "build:gr": "vue-cli-service build --mode gr",
+    "build:yc": "vue-cli-service build --mode yc",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
     "test:unit": "vue-cli-service test:unit",

@@ -3,7 +3,7 @@ import { MAINHOST } from '@/config'
 
 declare type Methods = "GET" | "OPTIONS" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT"
 
-const baseURL = process.env.NODE_ENV === 'production' ? MAINHOST : location.origin
+const baseURL = process.env.VUE_APP_WEB_API
 
 class HttpRequest {
     public queue: any // 请求的url集合
