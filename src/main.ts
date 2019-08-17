@@ -5,6 +5,10 @@ import store from './store';
 import 'lib-flexible'
 import 'babel-polyfill'
 
+import { Button } from 'vant';
+
+Vue.use(Button)
+
 import '@/assets/css/common.scss'
 
 Vue.config.productionTip = false;

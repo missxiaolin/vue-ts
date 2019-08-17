@@ -4,6 +4,7 @@
     <div class="ceshi">
       测试
     </div>
+    <van-button type="primary">主要按钮</van-button>
   </div>
 </template>
 
