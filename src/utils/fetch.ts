@@ -1,7 +1,4 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
-import { MAINHOST } from '@/config'
-
-declare type Methods = "GET" | "OPTIONS" | "HEAD" | "POST" | "PUT" | "DELETE" | "TRACE" | "CONNECT"
 
 const baseURL = process.env.VUE_APP_WEB_API
 

@@ -8,11 +8,13 @@ const path = require('path')
 const basePath = path.resolve(__dirname, '../src')
 
 const dirName = process.argv[2]
+const fileName = process.argv[3]
 const capPirName = dirName.substring(0, 1).toUpperCase() + dirName.substring(1)
-if (!dirName) {
-    console.log('文件夹名称不能为空！')
-    console.log('示例：npm run tep ${capPirName}')
-    process.exit(0)
+
+if (!dirName || !fileName) {
+  console.log('文件夹名称文件名称不能为空！')
+  console.log('示例：npm run com ${capPirName} ${fileName}')
+  process.exit(0)
 }
 
 /**
@@ -26,13 +28,15 @@ const VueTep = `<template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator"
-import { ${capPirName}Data } from '@/types/views/${dirName}.interface'
+interface Data {
+  pageName: string
+}
 
 @Component({})
 export default class About extends Vue {
   // data
-  data: ${capPirName}Data = {
-    pageName: '${dirName}'
+  data: Data = {
+    pageName: '${fileName}'
   }
 
   created() {
@@ -59,19 +63,11 @@ export default class About extends Vue {
 </style>
 `
 
-// interface 模版
-const interfaceTep = `// ${dirName}.Data 参数类型
-export interface ${capPirName}Data {
-  pageName: string
-}
-`
-
-fs.mkdirSync(`${basePath}/views/${dirName}`) // mkdir
-
-process.chdir(`${basePath}/views/${dirName}`) // cd views
-fs.writeFileSync(`${dirName}.vue`, VueTep) // vue 
-
-process.chdir(`${basePath}/types/views`); // cd types
-fs.writeFileSync(`${dirName}.interface.ts`, interfaceTep) // interface
-
-process.exit(0)
+fs.readdir(`${basePath}/views/${dirName}`,function(err, file){
+  if (err) {
+    fs.mkdirSync(`${basePath}/views/${dirName}`) // mkdir
+  }
+  process.chdir(`${basePath}/views/${dirName}`) // cd views
+  fs.writeFileSync(`${fileName}.vue`, VueTep) // vue 
+  process.exit(0)
+})

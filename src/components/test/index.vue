@@ -6,7 +6,9 @@
 
 <script lang="ts">
   import { Component, Vue, Prop } from "vue-property-decorator"
-  import { TestData } from '@/types/components/test.interface'
+  interface Data {
+    componentName: string
+  }
 
   @Component({})
   export default class About extends Vue {
@@ -17,8 +19,8 @@
     }) name!: string
 
     // data
-    data: TestData = {
-      componentName: 'test'
+    data: Data = {
+      componentName: 'index'
     }
 
     created() {
