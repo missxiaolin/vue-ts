@@ -61,7 +61,7 @@ const VueTep = `<template>
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import "@/assets/scss/variables";
 
   .${dirName}-wrap {
