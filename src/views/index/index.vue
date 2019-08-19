@@ -1,7 +1,7 @@
 <template>
   <div class="index-wrap">
     {{data.pageName}}
-    <div class="ceshi">
+    <div class="ceshi" @click="clicked">
       测试
     </div>
     <van-button type="primary">主要按钮</van-button>
@@ -43,6 +43,10 @@ export default class About extends Vue {
   // 初始化函数
   init() {
     //
+  }
+
+  clicked() {
+    alert(1)
   }
 }
 </script>
