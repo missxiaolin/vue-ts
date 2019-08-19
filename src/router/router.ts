@@ -8,10 +8,13 @@ export default [
   {
     path: '/',
     redirect: '/index'
-  },
-  {
+  }, {
     path: '/index',
     name: 'index',
     component: () => import('@/views/index/index.vue'),
+  }, {
+    path: '/error',
+    name: 'error',
+    component: () =>  import('@/views/error/errors.vue')
   }
 ]
