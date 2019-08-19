@@ -66,3 +66,36 @@ a {
 form {
     display: block;
 }
+
+.box-flex{ display: flex; display: -webkit-flex; display: -moz-flex; display: -ms-flex; display: -o-flex;}
+.item-flex{ flex: 1; -webkit-flex: 1; -moz-flex: 1; -ms-flex: 1; -o-flex: 1;}
+
+/*      项目在 X  轴的【排列】方向    */
+.flex-row{ flex-direction: row ;                        /* 主轴为水平方向，起点在左端   */}
+.flex-row-reverse{ flex-direction: row-reverse ;        /* 主轴为水平方向，起点在右端   */}
+
+/*     在 X 轴上的【对齐】方式        */
+.justify-start{ justify-content: flex-start;             /*  默认：左对齐  */ }
+.justify-center{ justify-content: center;               /* 居中  */ }
+.justify-between{ justify-content: space-between;       /* 两端对齐，项目之间的间隔都相等    */ }
+.justify-around{ justify-content: space-around;         /*   每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍  */ }
+.justify-end{ justify-content: flex-end;                /*  右对齐 */ }
+
+/*      在 X 轴 上 【项目换行】 方式      */
+.flex-nowrap{ flex-wrap: nowrap;                        /*  （默认）：不换行 */  }
+.flex-wrap{ flex-wrap: wrap;                            /*  换行，第一行在上方 */  }
+.flex-reverse{ flex-wrap: wrap-reverse;                 /*  换行，第一行在下方*/  }
+
+/*      项目在 Y  轴的【排列】方向    -----------------------------------------------------                */
+.flex-column{ flex-direction: column ;                  /* 主轴为垂直方向，起点在上沿   */}
+.flex-column-reverse{ flex-direction: column-reverse ;  /* 主轴为垂直方向，起点在下沿  */}
+/*    -----  属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性    -----     */
+.align-start{align-self: flex-start;          /* 主轴为垂直方向，起点在上沿   */}
+.align-end{align-self: flex-end;          /* 主轴为垂直方向，起点在下沿   */}
+
+/*      在 Y 轴 上 【对齐】 方式      */
+.align-items-start{ align-items: flex-start;                   /*   Y轴的起点对齐  */}
+.align-items-end{ align-items: flex-end;                       /*   Y轴的终点对齐  */}
+.align-items-center{ align-items: center;                      /*   Y轴的中点对齐  */}
+.align-items-baseline{ align-items: baseline;                  /*   Y轴的项目的第一行文字的基线对齐  */}
+.align-items-stretch{ align-items: stretch;                    /*   Y轴如果项目未设置高度或设为auto，将占满整个容器的高度 */}
