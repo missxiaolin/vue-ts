@@ -19,54 +19,16 @@ const resolve = dir => {
 }
 
 module.exports = {
-    outputDir: 'dist', // 打包生成的生产环境构建文件的目录
+    publicPath: '/',
+    outputDir: 'public', // 打包生成的生产环境构建文件的目录
     lintOnSave: true, // eslint-loader 是否在保存的时候检查 
     // runtimeCompiler: false, // 是否使用包含运行时编译器的Vue核心的构建
-    assetsDir: '', // 放置生成的静态资源路径，默认在outputDir
+    assetsDir: 'assets', // 放置生成的静态资源路径，默认在outputDir
     indexPath: 'index.html', // 指定生成的 index.html 输入路径，默认outputDir
     // pages: undefined, // 构建多页
     productionSourceMap: false, // 开启 生产环境的 source map?
     configureWebpack: {
         plugins: process.env.NODE_ENV === 'production' ? [
-            /**
-             *  cnpm intall webpack-bundle-analyzer –save-dev
-             * // package.json
-             *   "analyz": "npm_config_report=true npm run build"
-             * npm run analyz
-            */
-            //打包性能分析
-            //new BundleAnalyzerPlugin(
-                // {
-                //     //  可以是`server`，`static`或`disabled`。
-                //     //  在`server`模式下，分析器将启动HTTP服务器来显示软件包报告。
-                //     //  在“静态”模式下，会生成带有报告的单个HTML文件。
-                //     //  在`disabled`模式下，你可以使用这个插件来将`generateStatsFile`设置为`true`来生成Webpack Stats JSON文件。
-                //     analyzerMode: 'server',
-                //     //  将在“服务器”模式下使用的主机启动HTTP服务器。
-                //     analyzerHost: '127.0.0.1',
-                //     //  将在“服务器”模式下使用的端口启动HTTP服务器。
-                //     analyzerPort: 8888, 
-                //     //  路径捆绑，将在`static`模式下生成的报告文件。
-                //     //  相对于捆绑输出目录。
-                //     reportFilename: 'report.html',
-                //     //  模块大小默认显示在报告中。
-                //     //  应该是`stat`，`parsed`或者`gzip`中的一个。
-                //     //  有关更多信息，请参见“定义”一节。
-                //     defaultSizes: 'parsed',
-                //     //  在默认浏览器中自动打开报告
-                //     openAnalyzer: true,
-                //     //  如果为true，则Webpack Stats JSON文件将在bundle输出目录中生成
-                //     generateStatsFile: false, 
-                //     //  如果`generateStatsFile`为`true`，将会生成Webpack Stats JSON文件的名字。
-                //     //  相对于捆绑输出目录。
-                //     statsFilename: 'stats.json',
-                //     //  stats.toJson（）方法的选项。
-                //     //  例如，您可以使用`source：false`选项排除统计文件中模块的来源。
-                //     //  在这里查看更多选项：https：  //github.com/webpack/webpack/blob/webpack-1/lib/Stats.js#L21
-                //     statsOptions: null,
-                //     logLevel: 'info' // 日志级别。可以是'信息'，'警告'，'错误'或'沉默'。
-                //   }
-            //),
             new CompressionWebpackPlugin({
                 // asset: '[path].gz[query]',
                 algorithm: 'gzip',
@@ -91,26 +53,12 @@ module.exports = {
         // 配置路径别名
         config.resolve.alias
             .set('@', resolve('src'))
-            .set('_c', resolve('src/components'))
-        // config.module.rule('ts-loader')
-        //                 .test(/\.(jsx|tsx|js|ts)$/)
-        //                 .use('ts-loader')
-        //                 .loader('ts-loader')
-        //                 .options({
-        //                     transpileOnly: true,
-        //                     getCustomTransformers: () => ({
-        //                     before: [ tsImportPluginFactory({
-        //                         libraryName: 'vant',
-        //                         libraryDirectory: 'lib',
-        //                         style: true
-        //                     }) ]
-        //                     }),
-        //                     compilerOptions: {
-        //                         module: 'es2015'
-        //                     }
-        //                 })
-        //                 .exclude(/node_modules/)
-        //                 .end()
+            .set('_c', resolve('src/components')).end()
+        config.module.rule('ts')
+            .use('ts-loader').loader('ts-loader')
+            .options({
+                appendTsSuffixTo: [/\.vue$/]
+            }).end();
     },
     css: {
         modules: false, // 启用 CSS modules
@@ -141,8 +89,18 @@ module.exports = {
     parallel: require('os').cpus().length > 1, // 在多核机器下会默认开启。
     pwa: {}, // PWA 插件的选项。   
     devServer: {
-        port: 8080, // 端口
-        proxy: 'http://kong.missxiaolin.com' // 设置代理
+        // port: 8080, // 端口
+        proxy: {
+            '/proxy': {
+                target: 'http://kong.missxiaolin.com',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/proxy': ''
+                }
+            }
+        }, // 设置代理
+        historyApiFallback: true,
+        hot: true
     },
     pluginOptions: {} // 第三方插件的选项
 }
