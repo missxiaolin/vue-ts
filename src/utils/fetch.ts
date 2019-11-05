@@ -1,5 +1,5 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios'
-import config from "@/config"
+// import config from "@/config"
 import router from "@/router/index"
 
 const isToIndex: string[] = [
