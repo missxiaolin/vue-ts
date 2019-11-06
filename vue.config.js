@@ -20,7 +20,7 @@ const resolve = dir => {
 
 module.exports = {
     publicPath: '/',
-    outputDir: 'public', // 打包生成的生产环境构建文件的目录
+    outputDir: 'dist', // 打包生成的生产环境构建文件的目录
     lintOnSave: true, // eslint-loader 是否在保存的时候检查 
     // runtimeCompiler: false, // 是否使用包含运行时编译器的Vue核心的构建
     assetsDir: 'assets', // 放置生成的静态资源路径，默认在outputDir
@@ -54,11 +54,11 @@ module.exports = {
         config.resolve.alias
             .set('@', resolve('src'))
             .set('_c', resolve('src/components')).end()
-        config.module.rule('ts')
-            .use('ts-loader').loader('ts-loader')
-            .options({
-                appendTsSuffixTo: [/\.vue$/]
-            }).end();
+        // config.module.rule('ts')
+        //     .use('ts-loader').loader('ts-loader')
+        //     .options({
+        //         appendTsSuffixTo: [/\.vue$/]
+        //     }).end();
     },
     css: {
         modules: false, // 启用 CSS modules
