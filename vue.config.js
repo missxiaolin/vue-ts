@@ -47,7 +47,11 @@ module.exports = {
                 sourceMap: false,
                 parallel: true,
             })
-        ] : []
+        ] : [],
+        // externals: process.env.NODE_ENV === 'production' ? {
+        //     'vue': 'Vue',
+        //     'vue-router': 'VueRouter',
+        // } : {},
     },
     chainWebpack: config => {
         // 配置路径别名
