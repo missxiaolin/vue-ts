@@ -14,6 +14,9 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // webpack.config.js
 const tsImportPluginFactory = require('ts-import-plugin')
 
+// 引入 HtmlWebpackPlugin
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+
 const resolve = dir => {
     return path.join(__dirname, dir)
 }
@@ -38,16 +41,35 @@ module.exports = {
             }),
             new UglifyJsPlugin({
                 uglifyOptions: {
-                  compress: {
-                    // warnings: false,
+                  compress: process.env.NODE_REALM === 'prd' ? {
                     drop_debugger: true,
                     drop_console: true,
+                  } : {
+                    drop_debugger: false,
+                    drop_console: false,
                   },
                 },
                 sourceMap: false,
                 parallel: true,
             })
         ] : [],
+        // new HtmlWebpackPlugin({
+        //     filename: 'public/index.html',
+        //     template: 'public/index.html',
+        //     inject: 'head',
+        //     minify: {
+        //         removeComments: true,
+        //         collapseWhitespace: true,
+        //         removeAttributeQuotes: true
+        //     },
+        //     chunksSortMode: 'dependency'
+        // }),
+        // new webpack.ProvidePlugin({
+        //     Vue: "vue",
+        //     "window.Vue": "vue",
+        //     VueRouter: "vue-router",
+        //     Vuex: 'vuex'
+        // })
         // externals: process.env.NODE_ENV === 'production' ? {
         //     'vue': 'Vue',
         //     'vue-router': 'VueRouter',
